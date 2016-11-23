@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" version="3.1" method="upgrade">
+	<name>Next4 Seo</name>
+	<author>André Luiz Pereira</author>
+	<creationDate>Novembro 2016</creationDate>
+	<copyright>(C) 2005 - 2016 Open Source Matters. All rights reserved.</copyright>
+	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+	<authorEmail>andre@next4.com.br</authorEmail>
+	<authorUrl>www.next4.com.br</authorUrl>
+	<version>0.1</version>
+	<description>Gerencia os dados de SEO para joomla e K2 </description>
+
+	<administration>
+		<menu>COM_NEXT4SEO_NAME</menu>
+		<submenu>
+			<menu link="option=com_next4seo&amp;view=joomla">COM_NEXT4SEO_JOOMLA</menu>
+			<menu link="option=com_next4seo&amp;view=k2">COM_NEXT4SEO_k2</menu>
+		</submenu>
+		<files>
+			<filename>next4seo.php</filename>
+			<filename>Controller.php</filename>
+			<filename>Helper.php</filename>
+			<filename>Model.php</filename>
+			<folder>langfiles</folder>
+			<folder>views</folder>
+		</files>
+		<languages folder="langfiles">
+			<language tag="en-GB">en-GB/en-GB.com_next4seo.ini</language>
+			<language tag="en-GB">en-GB/en-GB.com_next4seo.sys.ini</language>
+			<language tag="pt-BR">pt-BR/pt-BR.com_next4seo.ini</language>
+			<language tag="pt-BR">pt-BR/pt-BR.com_next4seo.sys.ini</language>
+		</languages>
+	</administration>
+</extension>
