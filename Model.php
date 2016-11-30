@@ -8,6 +8,45 @@ class Model {
 public static $errors = [];
 public $total = 0;
 
+public function csvK2()
+{
+  $db = JFactory::getDbo();
+  $query = $db->getQuery(true);
+
+  $query->select(
+      'id, catid, title, alias, metakey, metadesc'
+    );
+
+  $query->where('published=1 and trash = 0');
+
+  $query->from($db->quoteName('#__k2_items'));
+
+  $db->setQuery($query);
+
+  return $db->loadAssocList();
+
+}
+
+public function csvJoomla()
+{
+  $db = JFactory::getDbo();
+  $query = $db->getQuery(true);
+  $query->select(
+      'id,catid, title, alias, metakey,metadesc, metadata'
+    );
+
+
+
+  $query->where('state=1');
+
+  $query->from($db->quoteName('#__content'));
+
+  $db->setQuery($query);
+
+  return $db->loadAssocList();
+
+}
+
 public function ListK2()
 {
 
@@ -33,9 +72,9 @@ public function ListK2()
       'a.id, a.catid, a.title, a.alias, a.metakey, a.metadesc, a.metadata, a.hits, b.alias as cat_alias'
 );
 
-  $query->where('a.published=1 and a.trash = 0 and b.published=1 and b.trash = 0');
   $query->from($db->quoteName('#__k2_items','a'))
   ->join('INNER', $db->quoteName('#__k2_categories', 'b') . ' ON (' . $db->quoteName('a.catid') . ' = ' . $db->quoteName('b.id') . ')');
+  $query->where('a.published=1 and a.trash = 0 and b.published=1 and b.trash = 0');
   $db->setQuery($query,$limitstart, $limit);
   $resultado = $db->loadAssocList();
   $this->total = $this->total('#__k2_items');
@@ -91,7 +130,7 @@ public function total($tabela)
   if($tabela == '#__content'){
       $query->where('state=1');
   }else{
-    $query->where('published=1');
+    $query->where('published=1 and trash = 0');
   }
 
 

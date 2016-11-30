@@ -14,12 +14,83 @@ public static function getView($view)
 
   $action = self::$jinput->get('action',0,'string');
 
-  if($view == 'k2')
-  {
-    return Controller::K2Manager($action);
+  switch ($view) {
+    case 'k2':
+      return Controller::K2Manager($action);
+      break;
+    case 'csv':
+        return Controller::CSVManager($action);
+        break;
+    default:
+      return Controller::JoomlaManager($action);
+      break;
   }
 
-    return Controller::JoomlaManager($action);
+
+
+}
+
+private static function CSVexec($action, $lista)
+{
+
+  $periodo = date('d-m-Y_h-i-s');
+
+  header('Content-Type: text/csv; charset=utf-8');
+  header('Content-Disposition: attachment; filename=dados-'.$action.'-'.$periodo.'.csv');
+
+  $output = fopen('php://output', 'w');
+
+  if($action == 'joomla')
+  {
+    $dados = [
+      'id',
+      'catid',
+      'title',
+      'alias',
+      'metakey',
+      'metadesc',
+      'metadata'
+    ];
+  }else{
+    $dados = [
+      'id',
+      'catid',
+      'title',
+      'alias',
+      'metakey',
+      'metadesc'
+    ];
+  }
+
+  fputcsv($output, $dados);
+
+  foreach ($lista as $linha) {
+    fputcsv($output, $linha);
+  }
+
+  fclose($output);
+
+  JFactory::getApplication()->close();
+
+}
+
+private static function CSVManager($action)
+{
+
+  $model = new Model;
+  $lista = [];
+  if($action == 'joomla')
+  {
+      $lista = $model->csvJoomla();
+  }
+
+  if($action == 'k2')
+  {
+      $lista = $model->csvK2();
+  }
+
+  Controller::CSVexec($action,$lista);
+
 }
 
 

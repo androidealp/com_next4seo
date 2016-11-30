@@ -14,7 +14,7 @@
 		<menu>COM_NEXT4SEO_NAME</menu>
 		<submenu>
 			<menu link="option=com_next4seo&amp;view=joomla">COM_NEXT4SEO_JOOMLA</menu>
-			<menu link="option=com_next4seo&amp;view=k2">COM_NEXT4SEO_k2</menu>
+			<menu link="option=com_next4seo&amp;view=k2">COM_NEXT4SEO_K2</menu>
 		</submenu>
 		<files>
 			<filename>next4seo.php</filename>

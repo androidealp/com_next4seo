@@ -128,7 +128,7 @@ $pagination = $displayData['data']['pagination'];
    jQuery(function($){
      $('header.header .container-title').html('<h1 class="page-title"><?=$displayData['data']['title']?></h1>');
 
-
+     $('.row-fluid #toolbar').html('<a href="index.php?option=com_next4seo&view=csv&action=joomla" class="btn btn-small btn-success"><i class="fa fa-save"></fa> Exportar em CSV </a>');
 
      $('[data-nextsubmit]').on('click',function(e){
        e.preventDefault();
